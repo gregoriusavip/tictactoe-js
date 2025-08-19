@@ -133,8 +133,9 @@ const tictactoe = (() => {
         if (!gameboard.move(player, row, column)) {
             alert("Move is invalid");
             movePrompt(player);
+        } else {
+            return checkGameover(player, row, column);
         }
-        return checkGameover(player, row, column);
     }
 
     function checkGameover(player, row, column) {
