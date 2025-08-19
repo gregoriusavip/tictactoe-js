@@ -155,5 +155,3 @@ const tictactoe = (() => {
 
     return { startGame };
 })();
-
-tictactoe.startGame();
