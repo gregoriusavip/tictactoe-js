@@ -62,6 +62,12 @@ section#game div.cell button:hover {
     background-color: #ccd5ae;
 }
 
+section#game div.cell button:disabled {
+    box-shadow: none;
+    background-color: #fdf0d5;
+    cursor: not-allowed;
+}
+
 section#game div.cell button span {
     font-size: 3rem;
     visibility: hidden;
@@ -72,6 +78,10 @@ section#game div.cell button span.abs {
     left: 0;
     right: 0;
     text-align: center;
+}
+
+section#game div.cell button span.active {
+    visibility: visible;
 }
 
 section#game div.vertical {
