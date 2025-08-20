@@ -44,10 +44,22 @@ section#game div.cell button {
     all: unset;
     padding: 1rem;
     position: relative;
+    background-color: #fdf0d5;
+    transition: background-color .5s;
+    cursor: pointer;
 }
 
 section#game div.cell button:focus {
     outline: revert;
+}
+
+section#game div.cell button:active {
+    box-shadow: 5px 5px 10px 0px #14213D;
+    z-index: 2;
+}
+
+section#game div.cell button:hover {
+    background-color: #ccd5ae;
 }
 
 section#game div.cell button span {
