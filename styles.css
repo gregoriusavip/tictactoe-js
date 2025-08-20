@@ -28,12 +28,20 @@ section#game div.grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
     grid-template-rows: 1fr auto 1fr auto 1fr;
-    gap: 1rem;
     border: solid;
 }
 
 section#game div.cell button {
     height: 4rem;
+    all: unset;
+}
+
+section#game div.cell button:focus {
+    outline: revert;
+}
+
+section#game div.cell {
+    margin: 1rem;
 }
 
 section#game div.vertical {
