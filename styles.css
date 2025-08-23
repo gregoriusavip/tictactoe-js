@@ -1,1 +1,117 @@
+:root {
+    --section-padding-height: clamp(3.75rem, 8vw, 6.25rem);
+    --section-padding-width: 16px;
+    --default-font-size: clamp(1rem, 3vw, 2rem);
+    --container-width: 1600px;
+    --container-gap: clamp(3rem, 6vw, 4rem);
+}
 
+html {
+    font-size: var(--default-font-size);
+}
+
+h1 {
+    font-size: 2.4rem;
+}
+
+main section {
+    padding: var(--section-padding-height) var(--section-padding-width);
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+div.container {
+    width: 100%;
+    margin: auto;
+    max-width: var(--container-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--container-gap);
+}
+
+section#game div.grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-rows: 1fr auto 1fr auto 1fr;
+    border: solid;
+}
+
+section#game div.cell button {
+    height: 4rem;
+    all: unset;
+    padding: 1rem;
+    position: relative;
+    background-color: #fdf0d5;
+    transition: background-color .5s;
+    cursor: pointer;
+}
+
+section#game div.cell button:focus {
+    outline: revert;
+}
+
+section#game div.cell button:active {
+    box-shadow: 5px 5px 10px 0px #14213D;
+    z-index: 2;
+}
+
+section#game div.cell button:hover {
+    background-color: #ccd5ae;
+}
+
+section#game div.cell button:disabled {
+    box-shadow: none;
+    background-color: #fdf0d5;
+    cursor: not-allowed;
+}
+
+section#game div.cell button span {
+    font-size: 3rem;
+    visibility: hidden;
+}
+
+section#game div.cell button span.ontop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+section#game div.cell button span.active {
+    visibility: visible;
+}
+
+section#game div.vertical {
+    grid-row: 1 / 6;
+    width: 2px;
+    background-color: black;
+}
+
+section#game div.horizontal {
+    grid-column: 1 / 6;
+    height: 2px;
+    background-color: black;
+}
+
+section#game div.vertical.first {
+    grid-column: 2 / 3;
+}
+
+section#game div.vertical.second {
+    grid-column: 4 / 5;
+}
+
+section#game div.horizontal.first {
+    grid-row: 2 / 3;
+}
+
+section#game div.horizontal.second {
+    grid-row: 4 / 5;
+}
