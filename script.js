@@ -27,7 +27,11 @@ const tttPlayers = (() => {
         return players[currentPlayerPointer];
     }
 
-    return { getCurrentPlayer, switchCurrentPlayer };
+    function resetPlayerPointer() {
+        currentPlayerPointer = 0;
+    }
+
+    return { getCurrentPlayer, switchCurrentPlayer, resetPlayerPointer };
 })();
 
 const gameboard = (() => {
@@ -91,7 +95,10 @@ const gameboard = (() => {
 });
 
 const display = (() => {
+    const activatedElements = [];
+
     function displayMove(symbolElement) {
+        activatedElements.push(symbolElement);
         symbolElement.classList.add('active');
     }
 
@@ -100,12 +107,18 @@ const display = (() => {
         containerElement.textContent = text;
     }
 
-    return { displayMove, displayGameOver };
+    function deactivateMoves() {
+        while (activatedElements.length) {
+            activatedElements.pop().classList.remove('active');
+        }
+    }
+
+    return { displayMove, displayGameOver, deactivateMoves };
 })();
 
-const interact = (() => {
+const interactable = (() => {
     const buttons = document.getElementsByClassName("move-buttons");
-    const tttBoard = gameboard();
+    let tttBoard = gameboard();
 
     for (const button of buttons) {
         button.addEventListener("click", function clicked(event) {
@@ -120,11 +133,19 @@ const interact = (() => {
                 display.displayMove(getSymbolElement(button, currentPlayer.symbol));
                 tttPlayers.switchCurrentPlayer();
                 checkGameOver(currentPlayer, row, col);
-                button.removeEventListener("click", clicked);
                 button.disabled = true;
             }
         })
     }
+
+    // Restart button
+    document.querySelector("div.ui button#restart").addEventListener("click", () => {
+        enableButtons();
+        display.deactivateMoves();
+        display.displayGameOver("");
+        tttBoard = gameboard();
+        tttPlayers.resetPlayerPointer();
+    })
 
     function checkGameOver(currentPlayer, row, col) {
         let result = "";
@@ -143,6 +164,12 @@ const interact = (() => {
         const notDisabledButtons = document.querySelectorAll(".move-buttons:not([disabled])");
         for (const button of notDisabledButtons) {
             button.disabled = true;
+        }
+    }
+
+    function enableButtons() {
+        for (const button of buttons) {
+            button.disabled = false;
         }
     }
 
