@@ -1,4 +1,4 @@
-class Player{
+class Player {
     constructor(name, symbol) {
         this.name = name;
         this.symbol = symbol;
@@ -9,7 +9,7 @@ class Player{
         return `${this.name} is the winner`;
     }
 
-    incrementWin () {
+    incrementWin() {
         totalWins++;
     }
 }
@@ -115,7 +115,7 @@ const interact = (() => {
             const col = parseInt(button.dataset.column, 10);
             const currentPlayer = tttPlayers.getCurrentPlayer();
 
-            if (tttBoard.move(currentPlayer.symbol, row, col)){
+            if (tttBoard.move(currentPlayer.symbol, row, col)) {
                 // Move is playable
                 display.displayMove(getSymbolElement(button, currentPlayer.symbol));
                 tttPlayers.switchCurrentPlayer();
@@ -130,7 +130,7 @@ const interact = (() => {
         let result = "";
         if (tttBoard.win(row, col)) {
             result = currentPlayer.winnerSpeech();
-        } else if(tttBoard.draw()) {
+        } else if (tttBoard.draw()) {
             result = "It is a draw!";
         } else {
             return
@@ -140,13 +140,16 @@ const interact = (() => {
     }
 
     function disableButtons() {
-        // Disable all buttons
+        const notDisabledButtons = document.querySelectorAll(".move-buttons:not([disabled])");
+        for (const button of notDisabledButtons) {
+            button.disabled = true;
+        }
     }
 
-    function getSymbolElement(buttonElement, playerSymbol){
-        if (playerSymbol === -1 ){
+    function getSymbolElement(buttonElement, playerSymbol) {
+        if (playerSymbol === -1) {
             return buttonElement.getElementsByClassName("circle")[0];
-        } else{
+        } else {
             return buttonElement.getElementsByClassName("cross")[0];
         }
     }
